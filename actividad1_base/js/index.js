@@ -1,6 +1,6 @@
-document.querySelector(".boton").addEventListener("click", leer);
-document.querySelector("#nombre").addEventListener("keydown", teclado);
 const INPUT = document.querySelector("#nombre");
+document.querySelector(".boton").addEventListener("click", leer);
+INPUT.addEventListener("keydown", teclado);
 
 
 function teclado(e) {
@@ -10,11 +10,6 @@ function teclado(e) {
 function leer() {
     const nombre = INPUT.value.trim();
     (nombre) && escribir(capitalizarPrimeraLetra(nombre));
-
-    // (nombre) && (document.querySelector(".resultado").innerHTML+=`
-    // <select>
-    //     <option>${nombre}</option>
-    // </select>`)
      
     limpiar();
 }
@@ -30,5 +25,15 @@ function capitalizarPrimeraLetra(valor) {
 }
 
 function escribir(NOMBRE) {
-    
+    (!document.querySelector("select")) && crearSelect();
+    document.querySelector("select").innerHTML+=`<option>${NOMBRE}</option>`
+}
+
+function crearSelect() {
+    document.querySelector(".resultado").innerHTML+=`<select></select>`;
+    document.querySelector("select").addEventListener("click", saludo);
+}
+
+function saludo() {
+    INPUT.value=document.querySelector("select").value;
 }
